@@ -1,0 +1,80 @@
+@startuml
+!theme plain
+hide circle
+hide methods
+hide stereotypes
+
+entity "User" as User {
+  * user_id : INT <<PK>>
+  --
+  name : VARCHAR
+  shipping_address : VARCHAR
+}
+
+entity "Billing_info" as Billing_info {
+  * billing_id : INT <<PK>>
+  --
+  user_id : INT <<FK>>
+  card_number : VARCHAR
+  billing_address : VARCHAR
+}
+
+entity "Contact_data" as Contact_data {
+  * contact_id : INT <<PK>>
+  --
+  user_id : INT <<FK>>
+  email : VARCHAR
+  phone_number : VARCHAR
+}
+
+entity "UserTransaction" as UserTransaction {
+  * user_transaction_id : INT <<PK>>
+  --
+  user_id : INT <<FK>>
+  transaction_id : INT <<FK>>
+  role : VARCHAR
+}
+
+entity "Transaction" as Transaction {
+  * transaction_id : INT <<PK>>
+  --
+  product_id : INT <<FK>>
+  price_at_sale : DECIMAL
+  transaction_date : DATE
+  payment_status : VARCHAR
+  shipping_status : VARCHAR
+}
+
+entity "Product" as Product {
+  * product_id : INT <<PK>>
+  --
+  product_name : VARCHAR
+  price : DECIMAL
+  seller_id : INT <<FK>>
+  category : VARCHAR
+  description : TEXT
+  is_active : BOOLEAN
+}
+
+entity "Review" as Review {
+  * review_id : INT <<PK>>
+  --
+  stars_amount : INT
+  review_title : VARCHAR
+  user_id : INT <<FK>>
+  product_id : INT <<FK>>
+  review_description : TEXT
+}
+
+' ======================
+' Relationships (Crow’s Foot style)
+' ======================
+User ||--o{ Billing_info : has
+User ||--o{ Contact_data : has
+User ||--o{ UserTransaction : participates
+Transaction ||--o{ UserTransaction : involves
+User ||--o{ Product : sells
+Product ||--o{ Review : receives
+User ||--o{ Review : writes
+Product ||--o{ Transaction : is part of
+@enduml
