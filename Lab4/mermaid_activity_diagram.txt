@@ -1,0 +1,39 @@
+flowchart LR
+    %% SWIMLANES
+    subgraph Buyer["Buyer"]
+        A((Start))
+        A --> B[Open product page]
+        B --> C[Click leave review]
+
+        %% Flow returns here after form is displayed
+        F2[Enter review data]
+        F2 --> G[Submit review]
+    end
+
+    subgraph System["System"]
+        C --> D{Is user logged in?}
+
+        %% Login check
+        D -->|User is not logged in| E[Show error]
+
+        D -->|User is logged in| F[Display form]
+        F --> F2
+
+        %% Parallel block after submit
+        G --> H[[Fork]]
+
+        H --> I[Validate data]
+        H --> J[Log activity]
+
+        %% Validation decision
+        I --> K{Is data valid?}
+        K -->|Data is invalid| L[Show error]
+        K -->|Data is valid| M[[Join]]
+
+        %% Log activity also joins
+        J --> M
+
+        M --> N[Insert review into DB]
+        N --> O[Show success message]
+        O --> P((End))
+    end
