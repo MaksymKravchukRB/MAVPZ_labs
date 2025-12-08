@@ -1,0 +1,44 @@
+1. Functional Requirements (FR)
+
+User Account Management
+
+FR-01: The system must allow users to register a new account.
+FR-02: The system must allow users to log in using valid credentials.
+FR-03: The system must allow users to update their profile information.
+
+Browsing & Viewing Products
+
+FR-04: Buyers must be able to browse available products.
+FR-05: Buyers must be able to view detailed information of a selected product.
+
+Purchasing & Payments
+
+FR-06: Buyers must be able to purchase products.
+FR-07: The system must be able to process a payment request.
+FR-08: Failed or incomplete payments must not create a purchase record.
+
+Reviews
+
+FR-09: Buyers must be able to leave a review for a purchased product.
+FR-10: The system must validate submitted review data before saving it.
+
+Seller Product Management
+
+FR-11: Sellers must be able to create new product listings.
+FR-12: Sellers must be able to modify existing product listings.
+
+Seller Transactions
+
+FR-13: Sellers must be able to view a list of their transactions (sales).
+
+
+
+2. Non-Functional Requirements (NFR)
+
+NFR-01 (Performance): The system must load product listings within 2 seconds.
+NFR-02 (Security): Passwords and sensitive user information must be stored securely.
+NFR-03 (Availability): The system must be available at least 99% of the time.
+NFR-04 (Usability): The user interface must be intuitive and accessible to non-technical users.
+NFR-05 (Data Validation): The system must prevent invalid input in forms, including review forms, login, and product editing.
+NFR-06 (Consistency): All database updates must be performed atomically (purchase + payment consistency).
+NFR-07 (Scalability): The system must support at least 1,000 concurrent users.

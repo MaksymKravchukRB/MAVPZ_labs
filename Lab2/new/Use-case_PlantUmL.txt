@@ -1,0 +1,49 @@
+@startuml
+left to right direction
+skinparam actorStyle awesome
+
+actor User
+actor Buyer as B
+actor Seller as S
+actor "Payment Service" as PS
+
+User <|-- B
+User <|-- S
+
+rectangle "Online Marketplace System" {
+  (Register account)
+  (Login)
+  (Update profile)
+
+  (Browse products)
+  (View product details)
+  (Purchase product)
+  (Process payment)
+
+  (Leave review)
+  (Validate review)
+
+  (Create product listing)
+  (Edit product listing)
+  (View transactions)
+}
+
+User --> (Register account)
+User --> (Login)
+User --> (Update profile)
+
+B --> (Browse products)
+B --> (Purchase product)
+B --> (Leave review)
+
+S --> (Create product listing)
+S --> (Edit product listing)
+S --> (View transactions)
+
+PS --> (Process payment)
+
+' Extend relations (dashed arrows used as <<extend>>)
+(View product details) ..> (Browse products) : <<extend>>
+(Validate review) ..> (Leave review) : <<extend>>
+(Process payment) ..> (Purchase product) : <<extend>>
+@enduml
